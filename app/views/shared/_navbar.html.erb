@@ -1,0 +1,36 @@
+<% return unless user_signed_in? %>
+
+<nav class="fixed left-0 top-0 z-20 mx-auto flex h-[88px] w-full items-center border-b-4 border-black bg-white px-5 m500:h-16">
+  <div class="mx-auto flex w-[1300px] max-w-full items-center justify-between">
+    <div class="flex items-center gap-3 m400:flex-1 m400:pl-5">
+      <%= image_tag "logo.png", class: "md:0 h-12 w-auto fill-current text-gray-700 hover:text-gray-800" %>
+      <%= link_to 'E-WALLET OASIS', root_path, class: "text-4xl font-heading m500:text-xl" %>
+    </div>
+
+    <div class="flex items-center gap-10 m900:hidden">
+      <%= link_to 'Buy', root_path, class: "text-2xl font-bold font-base" %>
+      <%= link_to 'Top-up', root_path, class: "text-2xl font-bold font-base" %>
+      <%= link_to 'Bid', root_path, class: "text-2xl font-bold font-base" %>
+    </div>
+
+    <div class="flex w-[160px] items-center justify-end gap-5 m800:w-[unset] m400:gap-3">
+      <% if user_signed_in? %>
+        <div class="hidden lg:inline-flex z-10 items-center leading-none text-gray-700 no-underline align-middle rounded hover:text-gray-800 hover:bg-white">
+          <div class="relative" data-controller="dropdown">
+            <div data-action="click->dropdown#toggle click@window->dropdown#hide touch->dropdown#toggle touch@window->dropdown#hide" role="button" class="inline-block select-none" aria-label="Profile Menu">
+              <span class="flex items-center text-gray-700 appearance-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-12 h-12"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+              </span>
+            </div>
+            <div data-dropdown-target="menu" class="z-20 hidden mt-2 lg:absolute lg:right-0 dropdown-menu">
+              <div class="overflow-hidden bg-white border border-black rounded shadow-base [background-size:16px_16px]">
+                <%= link_to "Profile", edit_user_registration_path, class: 'text-2xl font-bold no-underline block px-6 py-3 text-gray-800 border-2 border-black bg-white hover:bg-primary-50 transition ease-in-out duration-200 whitespace-nowrap' %>
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'text-2xl font-bold no-underline block px-6 py-3 text-gray-800 border-2 border-black bg-white hover:bg-primary-50 transition ease-in-out duration-200 whitespace-nowrap' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>

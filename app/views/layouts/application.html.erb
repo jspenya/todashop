@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todashop</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-100">
+    <div class="main flex flex-col">
+      <%= render partial: "shared/navbar" %>
+      <%= render partial: "shared/flash" %>
+      <div class="lg:px-0 h-full">
+        <div class="flex flex-1 flex-col">
+          <main class="flex-1">
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -4,6 +4,56 @@
 #
 # Example:
 #
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+
+# Create Games
+# ["Mobile Legends", "Steam"].each do |name|
+#   Game.find_or_create_by!(name:)
+# end
+unless User.exists?
+  User.create(first_name: 'Juan', last_name: 'Dela Cruz', email: 'juan@delacruz.com', password: 'password', password_confirmation: 'password')
+end
+
+games = [
+  {
+    name: 'Mobile Legends',
+    image_link: 'https://yt3.googleusercontent.com/xzNabrcydSGOHhSBqVSpX_ozH7WdcQ7eMA08UfOX8v5X_7S-0MWwTNzebgAs0t-iqV1B_Lxd=s900-c-k-c0x00ffffff-no-rj',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore est assumenda quam, earum mollitia nulla. Recusandae tempore, vero voluptas sunt modi inventore, laudantium consequuntur omnis nesciunt, dolore fugiat ullam eius.'
+  },
+  {
+    name: 'Steam',
+    image_link: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/800px-Steam_icon_logo.svg.png',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam placeat nulla obcaecati, quam harum id blanditiis earum expedita labore dolor impedit ducimus nihil quis hic illum facere omnis esse veritatis?'
+  }
+]
+
+games.each do |g|
+  Game.find_or_create_by!(g)
+end
+
+products = [
+  {
+    name: '11 Diamonds',
+    sub_description: '(10 + 1 bonus)',
+    game: Game.find_by_name('Mobile Legends'),
+    price: 9.50,
+    image_link: 'https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/100x100/50orless_MLBB_Diamonds.png',
+  },
+  {
+    name: '56 Diamonds',
+    sub_description: '(51 + 5 bonus)',
+    game: Game.find_by_name('Mobile Legends'),
+    price: 47.50,
+    image_link: 'https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/100x100/50ormore_MLBB_Diamonds.png'
+  },
+  {
+    name: '223 Diamonds',
+    sub_description: '(203 + 20 bonus)',
+    game: Game.find_by_name('Mobile Legends'),
+    price: 190.00,
+    image_link: 'https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/100x100/150orMore_MLBB_Diamonds.png'
+  }
+]
+
+products.each do |product|
+  Product.find_or_create_by!(product)
+end

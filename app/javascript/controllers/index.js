@@ -4,19 +4,8 @@
 
 import { application } from "./application"
 
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
-
-// Register each controller with Stimulus
-// import controllers from "./**/*_controller.js"
-// controllers.forEach((controller) => {
-//   application.register(controller.name, controller.module.default)
-// })
-
-import { Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
-application.register('dropdown', Dropdown)
-application.register('modal', Modal)
-application.register('tabs', Tabs)
-application.register('popover', Popover)
-application.register('toggle', Toggle)
-application.register('slideover', Slideover)

@@ -9,6 +9,8 @@
 # ["Mobile Legends", "Steam"].each do |name|
 #   Game.find_or_create_by!(name:)
 # end
+puts "Seeding data.."
+
 unless User.exists?
   User.create(first_name: 'Juan', last_name: 'Dela Cruz', email: 'juan@delacruz.com', password: 'password', password_confirmation: 'password')
 end
@@ -51,9 +53,32 @@ products = [
     game: Game.find_by_name('Mobile Legends'),
     price: 190.00,
     image_link: 'https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/100x100/150orMore_MLBB_Diamonds.png'
+  },
+  {
+    name: '200 Funds',
+    sub_description: '₱ 200.00',
+    game: Game.find_by_name('Steam'),
+    price: 200.00,
+    image_link: 'https://www.pngkey.com/png/full/238-2385804_50-steam-wallet-gift-card-steam-wallet-gift.png'
+  },
+  {
+    name: '400 Funds',
+    sub_description: '₱ 400.00',
+    game: Game.find_by_name('Steam'),
+    price: 400.00,
+    image_link: 'https://www.pngkey.com/png/full/238-2385804_50-steam-wallet-gift-card-steam-wallet-gift.png'
+  },
+  {
+    name: '600 Funds',
+    sub_description: '₱ 600.00',
+    game: Game.find_by_name('Steam'),
+    price: 600.00,
+    image_link: 'https://www.pngkey.com/png/full/238-2385804_50-steam-wallet-gift-card-steam-wallet-gift.png'
   }
 ]
 
 products.each do |product|
   Product.find_or_create_by!(product)
 end
+
+puts "Seeding done! 🌱"

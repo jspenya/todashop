@@ -8,6 +8,18 @@
                   focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md" %>
       </div>
 
+      <div class="field mb-5 mt-5">
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", placeholder: 'first name',
+          class: "w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]
+                  focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md" %>
+      </div>
+
+      <div class="field mb-5 mt-5">
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", placeholder: 'last name',
+          class: "w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]
+                  focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md" %>
+      </div>
+
       <div class="field mb-5">
         <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password',
           class: "w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]

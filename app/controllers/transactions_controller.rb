@@ -8,16 +8,12 @@ class TransactionsController < ApplicationController
   def show; end
 
   def pay
-    # Transaction.create!
+    Transaction.create!(product_id: params[:product_id], user_id: current_user.id)
   end
 
   private
 
   def set_transaction
     @transaction = Transaction.find_by_id(params[:id])
-  end
-
-  def transaction_params
-    params.require(:product).permit(:name, :price, :game_id, :qrcode)
   end
 end

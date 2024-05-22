@@ -17,4 +17,19 @@ export default class extends Controller {
       this.modalTarget.close();
     }
   }
+
+  showBdo(event) {
+    document.getElementById(`bdo-form-${event.target.dataset.productId}`).classList.toggle('hidden')
+    document.getElementById(`gcash-form-${event.target.dataset.productId}`).classList.add('hidden')
+  }
+
+  showGcash(event) {
+    document.getElementById(`gcash-form-${event.target.dataset.productId}`).classList.toggle('hidden')
+    document.getElementById(`bdo-form-${event.target.dataset.productId}`).classList.add('hidden')
+  }
+
+  closeForm(event) {
+    this.modalTarget.close();
+    document.getElementById('payment-success-modal').showModal();
+  }
 }

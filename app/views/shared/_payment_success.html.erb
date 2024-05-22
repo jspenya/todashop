@@ -1,0 +1,14 @@
+<div data-controller="dialog" data-action="click->dialog#clickOutside">
+  <dialog data-dialog-target="modal" id="payment-success-modal" class="backdrop:bg-slate-400 backdrop:opacity-80 px-8 py-4 bg-fuchsia-100 border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]" style="width:fit-content;">
+    <div class="w-full grid place-content-center">
+      <div class="text-center flex flex-col">
+        <div>
+          <h1 class="text-3xl font-bold mb-4">Congratulations on your purchase! 🎉</h1>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold mb-4">You can check your recent transactions in your <%= link_to 'profile', edit_user_registration_path, class: 'underline' %> page.</h1>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</div>

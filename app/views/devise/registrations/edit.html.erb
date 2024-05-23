@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center bg-cyan-200 w-full p-5 min-h-screen max-h-full">
-  <div class="not-prose flex gap-8 flex-col md:flex-row items-center justify-center z-[15] relative border-2 mb-5 border-black bg-white bg-[radial-gradient(#cacbce_1px,transparent_1px)] px-10 py-20 shadow-base [background-size:16px_16px] m750:px-5 m750:py-10">
+  <div class="not-prose flex gap-8 flex-row md:flex-col items-center justify-center z-[15] relative border-2 mb-5 border-black bg-white bg-[radial-gradient(#cacbce_1px,transparent_1px)] px-10 py-20 shadow-base [background-size:16px_16px] m750:px-5 m750:py-10">
     <div>
       <h1 class="text-5xl font-bold"><%= greet %>, <%= current_user.first_name %>!</h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:"mt-5", method: :put }) do |f| %>
@@ -44,23 +44,54 @@
         </div>
       <% end %>
     </div>
-    <% if current_user.transactions %>
-      <div>
-        <h1 class="text-3xl font-bold">Recent transactions:</h1>
+    <div class="relative">
+      <% if current_user.transactions %>
+      <h1 class="text-3xl font-bold">Recent transactions:</h1>
+      <div class="grid grid-cols-3 gap-4">
         <% current_user.transactions.each do |transaction| %>
           <div class="w-80 my-5 h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
-            <article class="w-full h-full flex items-center justify-items-center">
-              <figure class="w-full py-2 px-1 m-auto">
-                <%= image_tag transaction.product.image_link, class: 'w-20 h-20 object-cover', alt: 'thumbnail' %>
-              </figure>
-              <span class="text-3xl pr-5 font-bold"><%= transaction.product.name %></span>
-              <% if transaction.product.sub_description %>
-                <span class="text-sm pr-5 font-bold"><%= transaction.product.sub_description %></span>
-              <% end %>
-            </article>
+            <div class="w-full h-full flex flex-col">
+              <div class="flex items-center justify-items-center">
+                <figure class="w-full py-2 px-1 m-auto">
+                  <%= image_tag transaction.product.image_link, class: 'w-20 h-20 object-cover', alt: 'thumbnail' %>
+                </figure>
+                <span class="text-3xl pr-5 font-bold"><%= transaction.product.name %></span>
+                <% if transaction.product.sub_description %>
+                  <span class="text-sm pr-5 font-bold"><%= transaction.product.sub_description %></span>
+                <% end %>
+              </div>
+              <div class="m-auto text-center">
+                <span><%= transaction.created_at.strftime('%l:%M %p on %a %b %-d, %Y') %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <h1 class="mt-10 text-3xl font-bold">Recent bids:</h1>
+      <div class="grid grid-cols-3 gap-4">
+        <% current_user.bids.each do |bid| %>
+          <div class="w-80 my-5 h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
+            <div class="w-full h-full flex flex-col">
+              <div class="flex items-center justify-items-center">
+                <figure class="w-full py-2 px-1 m-auto">
+                  <%= image_tag bid.product.image_link, class: 'w-20 h-20 object-cover', alt: 'thumbnail' %>
+                </figure>
+                <span class="text-3xl pr-5 font-bold"><%= bid.product.name %></span>
+                <% if bid.product.sub_description %>
+                  <span class="text-sm pr-5 font-bold"><%= bid.product.sub_description %></span>
+                <% end %>
+              </div>
+              <div class="m-auto text-center">
+                <span><%= bid.created_at.strftime('%l:%M %p on %a %b %-d, %Y') %></span>
+                <div>
+                  <span class="bg-pink-100 text-pink-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-pink-400 border border-pink-400"><%= bid.status.titleize %></span>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>
     <% end %>
+    </div>
   </div>
 </div>

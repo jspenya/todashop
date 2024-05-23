@@ -23,4 +23,8 @@ module ApplicationHelper
   def to_peso(price)
     number_to_currency(price, unit: "₱", format: "%u %n")
   end
+
+  def bid_placed?(product_id)
+    current_user.bids.pluck(:product_id).include? product_id
+  end
 end

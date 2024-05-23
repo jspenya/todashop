@@ -1,7 +1,7 @@
   <div data-controller="dialog" data-action="click->dialog#clickOutside">
-    <button data-action="click->dialog#open">
-      <div class="w-80 h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
-        <article class="w-full h-full flex flex-col items-center justify-items-center pb-5">
+    <button data-action="<%= bid_placed?(product.id) ? '' : 'click->dialog#open' %>" class="<%= bid_placed?(product.id) ? 'cursor-not-allowed' : '' %>" id="bidding-item-<%= product.id %>">
+      <div class="w-80 h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white min-h-350">
+        <article class="w-full h-full flex flex-col items-center justify-items-center pb-5 relative">
           <figure class="w-full py-2 px-1 m-auto">
             <%= image_tag product.image_link, class: 'w-20 h-20 object-cover m-auto rounded-md', alt: 'thumbnail' %>
           </figure>
@@ -21,18 +21,35 @@
               <dt class="text-red-600 font-bold">No Bids Yet</dt>
             <% end %>
           </dl>
+          <dl class="mb-5">
+            <dd class="font-bold">Time Remaining</dd>
+            <dt class="text-red-500">
+              <% seconds_until_target_time = (Time.now + 2.minutes).to_i - Time.now.to_i %>
+
+              <%= content_tag(:h1, "", data: {
+                controller: "countdown",
+                countdown_target: "countdown",
+                seconds_until_end_value: seconds_until_target_time
+              }) %>
+            </dt>
+          </dl>
+          <% if bid_placed?(product.id) %>
+            <span class="bg-pink-100 text-pink-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-pink-400 border border-pink-400 absolute top-0 mt-10">Bid Placed</span>
+          <% end %>
         </article>
       </div>
     </button>
 
     <!-- MODAL START -->
-    <dialog data-dialog-target="modal" class="backdrop:bg-slate-400 backdrop:opacity-80 px-8 py-4 bg-fuchsia-100 border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]" style="width:fit-content;">
+    <dialog data-dialog-target="modal" class="backdrop:bg-slate-400 backdrop:opacity-80 px-8 py-4 bg-fuchsia-100 border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]" style="width:fit-content;" id="place-bid-dialog-<%= product.id %>">
       <div class="w-full grid place-content-center">
         <div class="text-center">
+          <div id="errors-container-<%= product.id %>"></div>
           <h1 class="text-2xl font-bold mb-4">Please place your bid, and pay.</h1>
           <div class="form">
-            <%= form_with url: pay_path, method: :post, remote: true do |form| %>
+            <%= form_with model: Bid.new, url: bids_url, method: :post do |form| %>
               <%= form.hidden_field :product_id, value: product.id %>
+              <%= form.hidden_field :user_id, value: current_user.id %>
               <div class="flex justify-between">
                 <div>
                   <label for="payment_method_bdo">
@@ -53,7 +70,8 @@
                   <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <span class="text-gray-500 sm:text-sm">₱</span>
                   </div>
-                  <input type="text" name="amount" id="amount" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" aria-describedby="price-currency">
+                  <%= form.text_field :amount,
+                    class: "block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", 'aria-describedby': 'price-currency', placeholder: '0.00' %>
                   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                     <span class="text-gray-500 sm:text-sm" id="price-currency">PHP</span>
                   </div>

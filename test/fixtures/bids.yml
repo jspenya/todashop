@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  amount     :decimal(8, 2)
+#  status     :integer          default("placed")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null

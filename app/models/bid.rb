@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  amount     :decimal(8, 2)
+#  status     :integer          default("placed")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null
@@ -23,19 +24,30 @@ class Bid < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
+  validates :user_id, presence: true
+  validates :product_id, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0 }
+
   validate :amount_greater_than_current_highest_bid
   validate :amount_greater_than_product_price
+
+  enum :status, { placed: 0, awarded: 1, lost: 2 }
 
   private
 
   def amount_greater_than_current_highest_bid
+    return if product.blank?
+    return if amount.blank?
+
     if amount <= product.bids.maximum(:amount).to_f
       errors.add(:amount, "must be greater than the current highest bid")
     end
   end
 
   def amount_greater_than_product_price
+    return if product.blank?
+    return if amount.blank?
+
     if amount <= product.price.to_f
       errors.add(:amount, "must be greater than or equal to product price")
     end

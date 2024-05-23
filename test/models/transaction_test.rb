@@ -3,6 +3,7 @@
 # Table name: transactions
 #
 #  id         :bigint           not null, primary key
+#  status     :integer          default("on_hold")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null

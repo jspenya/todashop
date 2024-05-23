@@ -3,6 +3,7 @@
 # Table name: transactions
 #
 #  id         :bigint           not null, primary key
+#  status     :integer          default("on_hold")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null
@@ -21,4 +22,6 @@
 class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :product
+
+  enum :status, { on_hold: 0, successful: 1, failed: 2 }
 end

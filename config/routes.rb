@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :games
   resources :products
+  resources :bids
 
   get "profile", to: "home#profile"
   post "pay", to: "transactions#pay"

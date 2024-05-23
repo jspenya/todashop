@@ -4,6 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  image_link      :string
+#  is_bidding      :boolean          default(FALSE)
 #  name            :string
 #  price           :decimal(8, 2)
 #  sub_description :string

@@ -3,6 +3,7 @@
 # Table name: bids
 #
 #  id         :bigint           not null, primary key
+#  amount     :decimal(8, 2)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null
@@ -21,4 +22,22 @@
 class Bid < ApplicationRecord
   belongs_to :product
   belongs_to :user
+
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validate :amount_greater_than_current_highest_bid
+  validate :amount_greater_than_product_price
+
+  private
+
+  def amount_greater_than_current_highest_bid
+    if amount <= product.bids.maximum(:amount).to_f
+      errors.add(:amount, "must be greater than the current highest bid")
+    end
+  end
+
+  def amount_greater_than_product_price
+    if amount <= product.price.to_f
+      errors.add(:amount, "must be greater than or equal to product price")
+    end
+  end
 end

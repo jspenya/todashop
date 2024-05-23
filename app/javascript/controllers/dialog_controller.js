@@ -21,11 +21,15 @@ export default class extends Controller {
   showBdo(event) {
     document.getElementById(`bdo-form-${event.target.dataset.productId}`).classList.toggle('hidden')
     document.getElementById(`gcash-form-${event.target.dataset.productId}`).classList.add('hidden')
+    document.getElementById(`submit-button-${event.target.dataset.productId}`).disabled = false
+    document.getElementById(`submit-button-${event.target.dataset.productId}`).classList.toggle('cursor-not-allowed')
   }
 
   showGcash(event) {
     document.getElementById(`gcash-form-${event.target.dataset.productId}`).classList.toggle('hidden')
     document.getElementById(`bdo-form-${event.target.dataset.productId}`).classList.add('hidden')
+    document.getElementById(`submit-button-${event.target.dataset.productId}`).disabled = false
+    document.getElementById(`submit-button-${event.target.dataset.productId}`).classList.toggle('cursor-not-allowed')
   }
 
   closeForm(event) {

@@ -19,4 +19,8 @@ module ApplicationHelper
       'Good Night'
     end
   end
+
+  def to_peso(price)
+    number_to_currency(price, unit: "₱", format: "%u %n")
+  end
 end

@@ -37,14 +37,14 @@
                 </div>
 
                 <div class="flex flex-col gap-2 hidden mt-5" id="bdo-form-<%= product.id %>">
-                  <%= form.text_field :cardholder_name, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'cardholder name', size: 20 %>
-                  <%= form.text_field :card_number, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'card number', size: 20 %>
-                  <%= form.text_field :expiry_date, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'expiry date', maxlength: 4 %>
-                  <%= form.password_field :cvv, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'cvv', maxlength: 3 %>
+                  <%= form.text_field :cardholder_name, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'Cardholder Name', size: 20 %>
+                  <%= form.text_field :card_number, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'Card Number', size: 20 %>
+                  <%= form.text_field :expiry_date, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'Expiry Date', maxlength: 4 %>
+                  <%= form.password_field :CVV, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'CVV', maxlength: 3 %>
                 </div>
 
                 <div class="flex flex-col gap-2 hidden mt-5" id="gcash-form-<%= product.id %>">
-                  <%= form.text_field :cardholder_name, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'gcash number', maxlength: 11 %>
+                  <%= form.text_field :cardholder_name, class: "border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md", placeholder: 'GCash Number', maxlength: 11 %>
                 </div>
 
                 <%= form.submit "SUBMIT", class: "mt-3 h-12 border-black border-2 p-2.5 bg-[#FFA6F6] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF] w-full", data: { action: "click->dialog#closeForm" } %>

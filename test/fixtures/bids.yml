@@ -3,6 +3,7 @@
 # Table name: bids
 #
 #  id         :bigint           not null, primary key
+#  amount     :decimal(8, 2)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  product_id :bigint           not null

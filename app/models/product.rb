@@ -4,6 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  image_link      :string
+#  is_bidding      :boolean          default(FALSE)
 #  name            :string
 #  price           :decimal(8, 2)
 #  sub_description :string
@@ -25,8 +26,13 @@ class Product < ApplicationRecord
   belongs_to :game
   has_one_attached :qrcode, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  has_many :bids, dependent: :destroy
 
   after_commit :generate_qrcode, on: :create
+
+  scope :bidding, -> { where(is_bidding: true)}
+  scope :not_bidding, -> { where(is_bidding: false)}
+  # Ex:- scope :active, -> {where(:active => true)}
 
   private
 

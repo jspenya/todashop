@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_22_193035) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_082026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,17 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_193035) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount", precision: 8, scale: 2
     t.index ["product_id"], name: "index_bids_on_product_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
-  end
-
-  create_table "bigs", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_bigs_on_product_id"
-    t.index ["user_id"], name: "index_bigs_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -76,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_193035) do
     t.decimal "price", precision: 8, scale: 2
     t.string "sub_description"
     t.string "image_link"
+    t.boolean "is_bidding", default: false
     t.index ["game_id"], name: "index_products_on_game_id"
   end
 
@@ -106,8 +99,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_193035) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bids", "products"
   add_foreign_key "bids", "users"
-  add_foreign_key "bigs", "products"
-  add_foreign_key "bigs", "users"
   add_foreign_key "products", "games"
   add_foreign_key "transactions", "products"
   add_foreign_key "transactions", "users"

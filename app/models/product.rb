@@ -27,8 +27,6 @@ class Product < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :bids, dependent: :destroy
 
-  after_commit :generate_qrcode, on: :create
-
   scope :bidding, -> { where(is_bidding: true)}
   scope :not_bidding, -> { where(is_bidding: false)}
 end

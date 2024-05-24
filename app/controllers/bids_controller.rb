@@ -29,11 +29,9 @@ class BidsController < ApplicationController
       if service.bid_placed?
         format.turbo_stream do
           render turbo_stream: [
-            # turbo_stream.prepend("pay_order_modal_body", partial: "shared/success_message", locals: { message: "Payment successful!" }),
             turbo_stream.remove("place-bid-dialog-#{product_id}"),
             turbo_stream.update("flash", partial: "shared/flash", locals: { notice: "You have successfully placed your bid!" }),
             turbo_stream.update("bidding-item-#{product_id}", partial: "bids/bidding_item", locals: { product: Product.find(product_id) })
-            # locals: { cash_change_amount: @payment.cash_change_amount }),
           ]
         end
       else
